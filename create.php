@@ -1,7 +1,6 @@
 <?php 
-//include('config.php');
-session_start();
-require 'auth.php';
+    session_start();
+    require 'auth.php';
 ?>
 
 <!DOCTYPE html>
@@ -84,21 +83,6 @@ require 'auth.php';
                         <h3 class="text-dark mb-0">Create Blog</h3>
                     </div>
                     <div class="card shadow">
-
-
-<!-- tinymce -->
-<!-- <form action="tinymce/connection.php" method="post" enctype="multipart/form-data">
-<div class="card-header py-3" >
-    <input type="text" name="title" placeholder="Title" style="width: 100%;border-color: rgba(0,0,0,0);padding-left: 19px;border-radius: 2px;box-shadow: 0px 0px 1px rgba(0,0,0,0.29);padding-top: 8px;padding-bottom: 8px;" required="" maxlength="70" minlength="10"></div>
-    <div class="card-body">
-        <textarea id="mytextarea" name="content"></textarea>
-        <div style="margin-top: 10px;">
-            <button class="btn btn-primary" type="button" id="submit" name="submit">Submit</button>
-        </div>
-    </div>
-</form> -->
-
-
 <form action="tinymce/connection.php" method="post" target="">
   		
             <div class="form-group">

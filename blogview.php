@@ -16,9 +16,6 @@
 <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar" >
         <div class="container" ><a class="navbar-brand logo" href="#">Prosper</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
-                <!-- <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="login.php" style="font-weight: bold;">LOGIN</a></li>
-                </ul> -->
             </div>
         </div>
     </nav>
@@ -26,14 +23,15 @@
 
             <?php
                 $con=mysqli_connect('localhost','root','','prosper') or die("Connection Failed:" .mysqli_connect_error());
-                if(isset($_GET['id'])){
-                $id=$_GET['id']; 
-                $sql = "SELECT * FROM blog WHERE id=".$id;
-
-                $result = mysqli_query($con,$sql);
-
-                if(mysqli_num_rows($result)>0){
-                    while($row=mysqli_fetch_assoc($result)){
+                if(isset($_GET['id']))
+                {
+                    $id=$_GET['id']; 
+                    $sql = "SELECT * FROM blog WHERE id=".$id;
+                    $result = mysqli_query($con,$sql);
+                    if(mysqli_num_rows($result)>0)
+                    {
+                        while($row=mysqli_fetch_assoc($result))
+                        {
                         echo ' 
                         <main class="page blog-post " style="background-color: #f6f6f6">
                         <section class="clean-block clean-post dark">
@@ -49,33 +47,25 @@
                                 </div>
                             </div>
                         </section>
-                    </main>';
+                        </main>';
+                        $id = $row['id'];
+                        $newviewcnt = $row['viewcnt'] + 1;
+                        $sql="UPDATE blog SET viewcnt=$newviewcnt WHERE id=$id";
+                        $query=mysqli_query($con, $sql); 
+                        }
 
-
-
-                $id = $row['id'];
-                $newviewcnt = $row['viewcnt'] + 1;
-                $sql="UPDATE blog SET viewcnt=$newviewcnt WHERE id=$id";
-                $query=mysqli_query($con, $sql); 
                     }
-
-                }else{
-                    echo '<div class="alert alert-danger" role="alert">
-                    <strong>Invalid ID! </strong> No Record Found.
-                </div>';
-
+                    else
+                    {
+                        echo '<div class="alert alert-danger" role="alert">
+                        <strong>Invalid ID! </strong> No Record Found.
+                        </div>';
+                    }
                 }
-
-
-
-
-                
-                
-            }
-
-            else{
-                header('Location: view.php');
-            }
+                else
+                {
+                    header('Location: view.php');
+                }
             ?>
 
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>

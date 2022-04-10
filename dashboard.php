@@ -1,14 +1,14 @@
-<?php include('config.php');
-session_start();
-require 'auth.php';
+<?php 
+    include('config.php');
+    session_start();
+    require 'auth.php';
 ?>
 
 <?php 
-      $con=mysqli_connect('localhost','root','','prosper') or die("Connection Failed:" .mysqli_connect_error()); ?>
-
-
-
-
+    $con=mysqli_connect('localhost','root','','prosper') 
+    or 
+    die("Connection Failed:" .mysqli_connect_error()); 
+?>
 
 <!DOCTYPE html>
 <html>
@@ -68,32 +68,6 @@ require 'auth.php';
                         <h3 class="text-dark mb-0">Dashboard</h3>
                     </div>
                     <div class="row">
-                        <!-- <div class="col-md-6 col-xl-3 mb-4">
-                            <div class="card shadow border-start-primary py-2">
-                                <div class="card-body">
-                                    <div class="row align-items-center no-gutters">
-                                        <div class="col me-2">
-                                            <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>Views today</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>11</span></div>
-                                        </div>
-                                        <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xl-3 mb-4">
-                            <div class="card shadow border-start-success py-2">
-                                <div class="card-body">
-                                    <div class="row align-items-center no-gutters">
-                                        <div class="col me-2">
-                                            <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>Total views</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>2000</span></div>
-                                        </div>
-                                        <div class="col-auto"><i class="fas fa-dollar-sign fa-2x text-gray-300"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
                         <div class="col-md-6 col-xl-3 mb-4">
                             <div class="card shadow border-start-info py-2">
                                 <div class="card-body">
@@ -102,12 +76,15 @@ require 'auth.php';
                                             <div class="text-uppercase text-info fw-bold text-xs mb-1"><span>Post</span></div>
                                             <div class="row g-0 align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="text-dark fw-bold h5 mb-0 me-3"><span>
-                                                        <?php $sql = "SELECT COUNT(id) FROM `blog` WHERE 1";
-                                                        $result = mysqli_query($con,$sql);
-                                                        $row = $result->fetch_row();
-                                                        echo $row[0];
-                                                        ?></span>
+                                                    <div class="text-dark fw-bold h5 mb-0 me-3">
+                                                    <span>
+                                                        <?php 
+                                                            $sql = "SELECT COUNT(id) FROM `blog` WHERE 1";
+                                                            $result = mysqli_query($con,$sql);
+                                                            $row = $result->fetch_row();
+                                                            echo $row[0];
+                                                        ?>
+                                                    </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -123,13 +100,15 @@ require 'auth.php';
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
                                             <div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>total views</span></div>
-                            
-                                            <div class="text-dark fw-bold h5 mb-0"><span>
-                                                        <?php $sql = "SELECT SUM(viewcnt) FROM `blog` WHERE 1";
+                                                <div class="text-dark fw-bold h5 mb-0">
+                                                <span>
+                                                    <?php 
+                                                        $sql = "SELECT SUM(viewcnt) FROM `blog` WHERE 1";
                                                         $result = mysqli_query($con,$sql);
                                                         $row = $result->fetch_row();
                                                         echo $row[0];
-                                                        ?></span>
+                                                    ?>
+                                                </span>
                                             </div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-chart-bar fa-2x text-gray-300"></i></div>
@@ -144,8 +123,6 @@ require 'auth.php';
                         <div class="card-header py-3">
                             <p class="text-primary m-0 fw-bold">Blog List</p>
                         </div>
-
-
                         <div class="card-body" style="padding-bottom: 2px;">
                             <div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info">
                                 <table class="table my-0" id="dataTable">
@@ -158,15 +135,15 @@ require 'auth.php';
                                             <th>Views</th>
                                         </tr>
                                     </thead>
-
-                                    <?php
-                    $sql = "SELECT id, title,content,date,viewcnt, SUBSTRING(content, 1, 40) AS previewcontent FROM `blog` WHERE 1;";
-                    $result = mysqli_query($con,$sql);
-                    if(mysqli_num_rows($result)>0){
-
-                    while($row = mysqli_fetch_assoc($result)){
-                    echo '
-                    <tbody>
+                                <?php
+                                    $sql = "SELECT id, title,content,date,viewcnt, SUBSTRING(content, 1, 40) AS previewcontent FROM `blog` WHERE 1;";
+                                    $result = mysqli_query($con,$sql);
+                                    if(mysqli_num_rows($result)>0)
+                                    {
+                                       while($row = mysqli_fetch_assoc($result))
+                                       {
+                                        echo '
+                                        <tbody>
                                         <tr>
                                             <td>'.$row["id"].'</td>
                                             <td>'.$row["title"].'</td>
@@ -174,21 +151,19 @@ require 'auth.php';
                                             <td>'.$row["date"].'</td>
                                             <td>'.$row["viewcnt"].'</td>
                                         </tr>
-                                    </tbody>';
-                    }
-           
-        }else{
-            echo '<tr><td>No Record</td></tr>';
-        }
-    ?>
-
-                                    <tfoot>
-                                        <tr></tr>
-                                    </tfoot>
+                                        </tbody>';
+                                        }        
+                                    }
+                                    else
+                                    {
+                                        echo '<tr><td>No Record</td></tr>';
+                                    }
+                                ?>
+                                <tfoot>
+                                    <tr></tr>
+                                </tfoot>
                                 </table>
-                            </div>
-                            
-                            <!-- <div class="d-sm-flex justify-content-between align-items-center mb-4" style="margin-bottom: 0px;padding-top: 8px;"><a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="#"><i class="fas fa-download fa-sm text-white-50"></i>&nbsp;Download</a></div> -->
+                            </div> 
                         </div>
                     </div>
                 </div>

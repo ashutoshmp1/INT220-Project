@@ -1,10 +1,11 @@
-<?php include('config.php');
-session_start();
-// require 'auth.php';
+<?php 
+    include('config.php');
+    session_start();
 ?>
 
 <?php 
-      $con=mysqli_connect('localhost','root','','prosper') or die("Connection Failed:" .mysqli_connect_error()); ?>
+    $con=mysqli_connect('localhost','root','','prosper') or die("Connection Failed:" .mysqli_connect_error()); 
+?>
 
 <!DOCTYPE html>
 <html>
@@ -62,31 +63,30 @@ session_start();
                     <div class="row justify-content-center">
 
                     <?php
-                    $sql = "SELECT * FROM blog";
-                    $result = mysqli_query($con,$sql);
-                    if(mysqli_num_rows($result)>0){
-
-                    while($row = mysqli_fetch_assoc($result)){
-                    echo '
-                    <div class="col-sm-6 col-lg-4" style="margin-bottom: 60px;">
-                            <div class="card text-center clean-card"><img class="card-img-top w-100 d-block" src="assets/img/avatars/avatar1.jpg">
-                                <div class="card-body info">
-                                    <h4 class="card-title" style="text-align: left; font-weight: bold;">'.$row["title"].'</h4>
-                                    <p class="card-text" style="text-align: left;">'.$row["content"].'</p>
-                                    <div class="icons" style="text-align: left;"><button class="btn btn-outline-primary btn-sm" type="button">Read More</button></div>
-                                </div>
-                            </div>
-                        </div>';
-                    }
-           
-        }else{
-            echo '<tr><td>No Record</td></tr>';
-        }
-    ?>
-
-
-
-                        
+                        //$sql = "SELECT * FROM blog";
+                        $sql = "SELECT id, title,content,date,viewcnt, SUBSTRING(content, 1, 40) AS previewcontent FROM `blog` WHERE 1;";
+                        $result = mysqli_query($con,$sql);
+                        if(mysqli_num_rows($result)>0)
+                        {
+                            while($row = mysqli_fetch_assoc($result))
+                            {
+                                echo '
+                                <div class="col-sm-6 col-lg-4" style="margin-bottom: 60px;">
+                                    <div class="card text-center clean-card"><img class="card-img-top w-100 d-block" src="assets/img/avatars/avatar1.jpg">
+                                        <div class="card-body info">
+                                            <h4 class="card-title" style="text-align: left; font-weight: bold;">'.$row["title"].'</h4>
+                                            <p class="card-text" style="text-align: left;">'.$row["content"].'</p>
+                                        <div class="icons" style="text-align: left;"><button class="btn btn-outline-primary btn-sm" type="button">Read More</button></div>
+                                        </div>
+                                    </div>
+                                </div>';
+                            }
+                        }
+                        else
+                        {
+                            echo '<tr><td>No Record</td></tr>';
+                        }
+                    ?>                      
                     </div>
                 </div>
             </section>

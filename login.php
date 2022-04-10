@@ -1,24 +1,27 @@
 <?php
 
-session_start(); //should be included on every page, must be called before any script or you can turn aut session start in php.ini
+    session_start(); 
+    //should be included on every page, must be called before any script
     require_once 'config.php';
     
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    if($_SERVER['REQUEST_METHOD'] == 'POST')
+    {
         $username = $_POST['username'];
         $password = $_POST['password'];
         // $new_password = md5($password.$username);
 
         $result = $user->getUser($username,$password);
-        if(!$result){
+        if(!$result)
+        {
             echo 'Username or Password is incorrect! Please try again.';
-        }else{
+        }
+        else
+        {
             $_SESSION['username'] = $username;
             $_SESSION['userid'] = $result['id'];
             header("Location: dashboard.php");
         }
-
     }
-
 ?>
 
 <!DOCTYPE html>

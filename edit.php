@@ -1,14 +1,14 @@
 <?php 
-//include('config.php');
-session_start();
-require 'auth.php';
-if(isset($_GET['blogid'])) {
-$blogid = $_GET['blogid'];
-$conn=mysqli_connect('localhost','root','','prosper') or die("Connection Failed:" .mysqli_connect_error());
-$sql = "SELECT * FROM blog WHERE id=$blogid";
-$result = mysqli_query($conn,$sql);
-$row = $result->fetch_assoc();
-$content = $row['content'];
+    session_start();
+    require 'auth.php';
+    if(isset($_GET['blogid'])) 
+    {
+        $blogid = $_GET['blogid'];
+        $conn=mysqli_connect('localhost','root','','prosper') or die("Connection Failed:" .mysqli_connect_error());
+        $sql = "SELECT * FROM blog WHERE id=$blogid";
+        $result = mysqli_query($conn,$sql);
+        $row = $result->fetch_assoc();
+        $content = $row['content'];
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +29,6 @@ $content = $row['content'];
 
     tinymce.init({
         selector: '#mytextarea',
-        // theme: "modern",
         height: 200,
         width: '100%',
     
@@ -100,7 +99,8 @@ $content = $row['content'];
   			</div>
   			
   			<div class="form-group">
-                <!-- TinyMCE Embed Here by Using ID (mytextarea)-->
+                
+              <!-- TinyMCE Embed Here by Using ID (mytextarea)-->
     			<textarea id="mytextarea" name="content"><?php echo $content;?></textarea>
   			</div>
               <input type="hidden" name="blogid" value="<?php echo $row['id']; ?>">
@@ -115,14 +115,8 @@ $content = $row['content'];
     </div>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/theme.js"></script>
-    <!-- JQuery File -->
     <script type="text/javascript" src="tinymce/jquery/jquery.js"></script>
     
-    <!-- BootStrap JS File-->
-	<!-- <script type="text/javascript" src="tinymce/bootstrap/js/bootstrap.min.js"></script> -->
-    
-    <!-- Fontawesome Icon JS-->
-    <!-- <script defer src="tinymce/fontawesome/js/all.js"></script> -->
 </body>
 </html>
 <?php } ?>
